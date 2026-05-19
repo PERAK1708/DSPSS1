@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard DSPSS</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="dashboard.css">
+
+    <!-- ICON -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+    <!-- BARIS ATAS -->
+    <div class="header-top">
+
+        <div class="logo">
+
+            <img src="aset/Logo 1.png" alt="Logo" class="logo-img">
+
+            <span>MY DASHBOARD</span>
+
+        </div>
+
+        <div class="user-box">
+
+            <div class="user-name">
+                <i class="fa-solid fa-user"></i>
+                Admin Login
+            </div>
+
+            <div class="clock" id="clock"></div>
+
+        </div>
+
+    </div>
+
+    <!-- RUNNING TEXT -->
+    <div class="running-text">
+
+        <marquee behavior="scroll" direction="left">
+
+            KU PIKIR HIDUP INI MUDAH * KOPIKIR LC KTV GRATIS DATANG DI DASHBOARD DSPSS • SEMUA BISA DIGITAL / SHOW • AREA INI BISA DIISI APA SAJA
+
+        </marquee>
+
+    </div>
+
+</div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+
+        <div class="pin-btn" id="pinBtn">
+            <i class="fa-solid fa-thumbtack"></i>
+        </div>
+
+        <div class="menu-title">
+            MENU UTAMA
+        </div>
+
+<ul>
+
+    <li onclick="loadPage('pages/home.html')">
+        <i class="fa-solid fa-house"></i>
+        <span>Dashboard</span>
+    </li>
+
+    <li onclick="loadPage('pages/pemasukan.html')">
+        <i class="fa-solid fa-money-bill-wave"></i>
+        <span>Pemasukan</span>
+    </li>
+
+    <li onclick="loadPage('pages/pengeluaran.html')">
+        <i class="fa-solid fa-wallet"></i>
+        <span>Pengeluaran</span>
+    </li>
+
+    <li onclick="loadPage('pages/users.html')">
+        <i class="fa-solid fa-users"></i>
+        <span>Users</span>
+    </li>
+
+    <li onclick="loadPage('pages/statistik.html')">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Statistik</span>
+    </li>
+
+    <li onclick="loadPage('pages/data.html')">
+        <i class="fa-solid fa-folder"></i>
+        <span>Data</span>
+    </li>
+
+    <li onclick="loadPage('pages/pengaturan.html')">
+        <i class="fa-solid fa-gear"></i>
+        <span>Pengaturan</span>
+    </li>
+
+    <li onclick="loadPage('pages/logout.html')">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
+    </li>
+
+</ul>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main" id="main">
+
+      
+
+        <!-- CONTENT -->
+        <div class="content-box">
+
+   <iframe 
+    src="pages/home.html"
+    class="content-frame"
+    id="contentFrame">
+  </iframe>
+
+</div>
+<footer>
+    &copy; 2026 DSPSS_dirgaz.itc®
+</footer>
+        </div>
+
+
+
+    <!-- TOGGLE BUTTON -->
+    <button class="toggle-btn" id="toggleBtn">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+</div>
+
+    <!-- JS -->
+    <script src="dashboard.js"></script>
+
+</body>
+</html>
