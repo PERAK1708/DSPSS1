@@ -1,3 +1,5 @@
+let dataPengeluaran = [];
+
 function tambahPengeluaran(){
 
     const nama =
@@ -16,29 +18,17 @@ function tambahPengeluaran(){
 
     const user = auth.currentUser;
 
-    const uid = user.uid;
+    db.ref("pengeluaran").push({
 
-    // ambil nama dari firestore
-    firestore.collection("users")
-    .doc(uid)
-    .get()
-    .then((doc)=>{
+        nama:nama,
 
-        const userData = doc.data();
+        jumlah:jumlah,
 
-        db.ref("pengeluaran").push({
+        uid:user.uid,
 
-            nama:nama,
+        dibuatOleh:user.email,
 
-            jumlah:jumlah,
-
-            uid:uid,
-
-            dibuatOleh:userData.username, // 👈 INI FIX
-
-            waktu:new Date().toLocaleString()
-
-        });
+        waktu:new Date().toLocaleString()
 
     });
 
@@ -47,54 +37,122 @@ function tambahPengeluaran(){
     document.getElementById("jumlah").value = "";
 
 }
+function tampilkanData(){
+    const tbody = document.getElementById("listPengeluaran");
+    tbody.innerHTML = "";
 
+    dataPengeluaran.forEach((item, index) => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${item.nama}</td>
+                <td>Rp ${item.jumlah}</td>
+                <td><button class="delete" onclick="hapus(${index})">Hapus</button></td>
+            </tr>
+        `;
+    });
+}
 
-// tampilkan data semua user
+function hapus(index){
+    dataPengeluaran.splice(index, 1);
+    tampilkanData();
+}
 auth.onAuthStateChanged((user)=>{
 
-    if(!user){
+    if(user){
+
+        db.ref("pengeluaran")
+        .on("value",(snapshot)=>{
+
+            const tbody =
+            document.getElementById("listPengeluaran");
+
+            tbody.innerHTML = "";
+
+            snapshot.forEach((child)=>{
+
+                const data = child.val();
+
+                const id = child.key;
+
+                tbody.innerHTML += `
+                    <tr>
+
+                        <td>${data.nama}</td>
+
+                        <td>Rp ${data.jumlah}</td>
+
+                        <td>${data.dibuatOleh}</td>
+
+                        <td>
+
+                        <button class="delete"
+                        onclick="hapus('${id}')">
+
+                        Hapus
+
+                        </button>
+
+                        </td>
+
+                    </tr>
+                `;
+
+            });
+
+        });
+
+    }else{
 
         window.top.location.href="../index.html";
 
-        return;
-
     }
 
-    db.ref("pengeluaran")
-    .on("value",(snapshot)=>{
+});
 
-        const tbody =
-        document.getElementById("listPengeluaran");
+auth.onAuthStateChanged((user)=>{
 
-        tbody.innerHTML = "";
+    if(user){
 
-        snapshot.forEach((child)=>{
+        const uid = user.uid;
 
-            const data = child.val();
+        db.ref("pengeluaran/" + uid)
+        .on("value",(snapshot)=>{
 
-            const id = child.key;
+            const tbody =
+            document.getElementById("listPengeluaran");
 
-            tbody.innerHTML += `
-                <tr>
-                    <td>${data.nama}</td>
-                    <td>Rp ${data.jumlah}</td>
-                    <td>${data.dibuatOleh}</td>
-                    <td>
+            tbody.innerHTML = "";
+
+            snapshot.forEach((child)=>{
+
+                const data = child.val();
+
+                const id = child.key;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${data.nama}</td>
+                        <td>Rp ${data.jumlah}</td>
+                        <td>
                         <button class="delete"
                         onclick="hapus('${id}')">
                         Hapus
                         </button>
-                    </td>
-                </tr>
-            `;
+                        </td>
+                    </tr>
+                `;
+
+            });
 
         });
 
-    });
+    }else{
+
+        window.top.location.href="../index.html";
+
+    }
 
 });
-
-
 function hapus(id){
 
     db.ref("pengeluaran/" + id).remove();
