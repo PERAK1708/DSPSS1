@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengeluaran</title>
+
+    <link rel="stylesheet" href="../CSS/pengeluaran.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <i class="fa-solid fa-wallet"></i>
+        <h1>Data Pengeluaran</h1>
+    </div>
+
+    <div class="form-box">
+        <input type="text" id="nama" placeholder="Nama Pengeluaran">
+        <input type="number" id="jumlah" placeholder="Jumlah (Rp)">
+        <button onclick="tambahPengeluaran()">Tambah</button>
+    </div>
+
+    <div class="table-box">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Jumlah</th>
+                    <th>Ditulis Oleh</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="listPengeluaran"></tbody>
+        </table>
+    </div>
+
+</div>
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<!-- CONFIG -->
+
+<script src="../JS/firebase.js"></script>
+
+<!-- PAGE -->
+
+<script src="../JS/pengeluaran.js"></script>
+
+</body>
+</html>
