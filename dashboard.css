@@ -234,3 +234,85 @@ footer{
     background:#94a3b8;
     border-radius:20px;
 }
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET & HP */
+@media screen and (max-width: 768px) {
+
+    /* SIDEBAR jadi overlay */
+    .sidebar {
+        position: fixed;
+        left: -250px;   /* sembunyi dulu */
+        top: 105px;
+        width: 250px;
+        z-index: 2000;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    /* MAIN full layar */
+    .main {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .main.full {
+        margin-left: 0;
+    }
+
+    /* FOOTER ikut full */
+    footer {
+        left: 0;
+        width: 100%;
+    }
+
+    /* CONTENT lebih fleksibel */
+    .content-box {
+        height: calc(100vh - 200px);
+    }
+
+    /* LOGO lebih kecil */
+    .logo span {
+        font-size: 16px;
+    }
+
+    .logo-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* USER info rapat */
+    .user-box {
+        font-size: 12px;
+    }
+
+    /* toggle button tetap muncul */
+    .toggle-btn {
+        bottom: 20px;
+        left: 15px;
+    }
+}
+
+/* HP kecil */
+@media screen and (max-width: 480px) {
+
+    .header {
+        height: 90px;
+        padding: 8px;
+    }
+
+    .running-text {
+        font-size: 12px;
+    }
+
+    .logo span {
+        display: none; /* biar tidak sempit */
+    }
+
+    .clock {
+        font-size: 11px;
+    }
+}
