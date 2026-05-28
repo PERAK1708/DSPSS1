@@ -1,0 +1,84 @@
+/* ================= CONTAINER ================= */
+
+.container{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    padding:10px;
+    box-sizing:border-box;
+}
+
+/* ================= ROW ================= */
+
+.row{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+/* ================= CARD ================= */
+
+.card{
+    flex:1 1 300px;
+    min-width:250px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+    /* SIDEBAR */
+    .sidebar{
+        width:80px;
+    }
+
+    .sidebar .text{
+        display:none;
+    }
+
+    /* CONTENT */
+    .content{
+        margin-left:80px;
+        padding:10px;
+    }
+
+    /* CARD */
+    .card{
+        flex:1 1 calc(50% - 15px);
+    }
+
+    /* TABLE */
+    table{
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
+    }
+
+    /* FORM */
+    input,
+    select,
+    button{
+        width:100%;
+        box-sizing:border-box;
+    }
+
+}
+
+/* ================= SMALL PHONE ================= */
+
+@media(max-width:480px){
+
+    h1{
+        font-size:18px;
+    }
+
+    .content{
+        padding:5px;
+    }
+
+    /* CARD */
+    .card{
+        flex:1 1 100%;
+    }
+
+}
