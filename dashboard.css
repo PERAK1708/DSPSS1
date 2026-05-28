@@ -15,7 +15,8 @@ body{
 .header{
     width:100%;
     height:105px;
-    background:#111827;
+    background:#533a2c;
+    background: url('../aset/logo033.png') center/cover no-repeat;
     color:white;
     position:fixed;
     top:0;
@@ -77,7 +78,7 @@ body{
 
 .running-text{
     width:100%;
-    background:#0ea5e9;
+    background:#c7e5f4;
     padding:0px 15px;
     border-radius:px;
     overflow:hidden;
@@ -147,6 +148,47 @@ body{
     display:none;
 }
 
+/* ================= WARNA MENU ================= */
+
+.menu-dashboard{
+    background:#2563eb;
+}
+
+.menu-pemasukan{
+    background:#16a34a;
+}
+
+.menu-pengeluaran{
+    background:#17cde1;
+}
+
+.menu-users{
+    background:#7ce386;
+}
+
+.menu-statistik{
+    background:#6c98bb;
+}
+
+.menu-data{
+    background:#1670b9;
+}
+
+.menu-setting{
+    background:#46545f;
+}
+
+.menu-logout{
+    background:#b91c1c;
+}
+
+/* Hover */
+
+.sidebar ul li:hover{
+    filter:brightness(1.1);
+    transform:translateX(3px);
+}
+
 /* PIN BUTTON */
 
 .pin-btn{
@@ -167,6 +209,8 @@ body{
     transition:0.3s;
     height:calc(100vh - 105px);
     overflow:auto;
+    background:rgb(236, 197, 158);
+
 }
 
 .main.full{
@@ -233,4 +277,86 @@ footer{
 ::-webkit-scrollbar-thumb{
     background:#94a3b8;
     border-radius:20px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET & HP */
+@media screen and (max-width: 768px) {
+
+    /* SIDEBAR jadi overlay */
+    .sidebar {
+        position: fixed;
+        left: -250px;   /* sembunyi dulu */
+        top: 105px;
+        width: 250px;
+        z-index: 2000;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    /* MAIN full layar */
+    .main {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .main.full {
+        margin-left: 0;
+    }
+
+    /* FOOTER ikut full */
+    footer {
+        left: 0;
+        width: 100%;
+    }
+
+    /* CONTENT lebih fleksibel */
+    .content-box {
+        height: calc(100vh - 200px);
+    }
+
+    /* LOGO lebih kecil */
+    .logo span {
+        font-size: 16px;
+    }
+
+    .logo-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* USER info rapat */
+    .user-box {
+        font-size: 12px;
+    }
+
+    /* toggle button tetap muncul */
+    .toggle-btn {
+        bottom: 20px;
+        left: 15px;
+    }
+}
+
+/* HP kecil */
+@media screen and (max-width: 480px) {
+
+    .header {
+        height: 90px;
+        padding: 8px;
+    }
+
+    .running-text {
+        font-size: 12px;
+    }
+
+    .logo span {
+        display: none; /* biar tidak sempit */
+    }
+
+    .clock {
+        font-size: 11px;
+    }
 }
