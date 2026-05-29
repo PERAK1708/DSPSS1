@@ -98,7 +98,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const lastPage =
     localStorage.getItem("lastPage")
-    || "pages/home.html";
+    || "pages/Home.html";
 
     document.getElementById("contentFrame").src = lastPage;
 
