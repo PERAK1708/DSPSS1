@@ -84,9 +84,25 @@ pinBtn.onclick = function(){
 
 function loadPage(page){
 
+    // ganti iframe
     document.getElementById('contentFrame').src = page;
 
+    // simpan halaman terakhir
+    localStorage.setItem("lastPage", page);
+
 }
+
+// ================= LOAD LAST PAGE =================
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    const lastPage =
+    localStorage.getItem("lastPage")
+    || "pages/home.html";
+
+    document.getElementById("contentFrame").src = lastPage;
+
+});
 // ================= PROTECT DASHBOARD =================
 if (localStorage.getItem("login") !== "true") {
     window.location.href = "index.html";
