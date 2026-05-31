@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<!-- PENTING: ini harus setelah firebase library -->
+
+<link rel="stylesheet" href="/css/menu.css">
+
+<title>Kelola Menu</title>
+</head>
+<body>
+
+<div class="header-menu">
+
+    <h2>🍽️ Kelola Menu</h2>
+
+    <button id="btnTambah">
+        + Tambah Menu
+    </button>
+
+</div>
+
+<div class="form-box" id="formBox">
+
+    <input
+        type="text"
+        id="namaMenu"
+        placeholder="Nama Menu">
+
+    <input
+        type="number"
+        id="hargaMenu"
+        placeholder="Harga">
+
+    <select id="kategoriMenu">
+
+        <option>Makanan</option>
+        <option>Minuman</option>
+        <option>Dessert</option>
+
+    </select>
+
+    <button id="btnSimpan">
+        Simpan
+    </button>
+
+</div>
+
+<div class="menu-list" id="menuList">
+
+</div>
+<script src="../js/firebase.js"></script>
+<script src="../js/menu.js"></script>
+</body>
+</html>

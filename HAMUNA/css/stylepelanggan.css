@@ -1,0 +1,170 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#7d8bc1;
+    padding-bottom:120px;
+}
+
+/* HEADER */
+.header{
+    background:#605652;
+    color:white;
+    padding:20px;
+    text-align:center;
+    border-radius:0 0 20px 20px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.subtitle{
+    font-size:13px;
+    opacity:.8;
+    margin-top:5px;
+}
+
+/* SEARCH */
+.search-box{
+    padding:15px;
+}
+
+.search-box input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    outline:none;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+/* CATEGORY */
+.category{
+    display:flex;
+    gap:10px;
+    padding:0 15px 10px;
+    overflow-x:auto;
+}
+
+.category button{
+    border:none;
+    padding:8px 14px;
+    border-radius:20px;
+    background:#eee;
+    white-space:nowrap;
+}
+
+.category .active{
+    background:#ff6b35;
+    color:white;
+}
+
+/* MENU */
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.card h3{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.card p{
+    color:#ff6b35;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.card button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background:#ff6b35;
+    color:white;
+}
+
+/* CHECKOUT */
+.checkout{
+.container{
+    display:flex;
+    gap:20px;
+    padding:15px;
+}
+
+.menu-grid{
+    flex:3;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:15px;
+
+    padding:0;
+}
+
+.checkout{
+    flex:1;
+
+    background:rgb(210, 234, 114);
+    border-radius:15px;
+    padding:15px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+
+    position:sticky;
+    top:15px;
+
+    height:fit-content;
+    min-width:300px;
+}
+    background:white;
+    padding:12px;
+    box-shadow:0 -2px 10px rgba(0,0,0,.1);
+}
+
+.checkout input{
+    width:48%;
+    padding:10px;
+    margin:3px 1%;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.checkout button{
+    width:100%;
+    margin-top:8px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-weight:bold;
+}
+@media(max-width:768px){
+
+    .container{
+        flex-direction:column;
+    }
+
+    .checkout{
+        min-width:100%;
+        position:static;
+    }
+
+}

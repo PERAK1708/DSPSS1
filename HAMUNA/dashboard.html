@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="aset/icon2.png" type="image/png">
+    <title>Dashboard DSPSS</title>
+
+    <!-- CSS -->
+    
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <!-- ICON -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+    <!-- BARIS ATAS -->
+    <div class="header-top">
+
+        <div class="logo">
+
+            <img src="https://i.postimg.cc/qB1qmPHJ/icon2.png" alt="Logo" class="logo-img">
+
+            <span>RESTO MANAGEMENT</span>
+
+        </div>
+
+        <div class="user-box">
+
+            <div class="user-name">
+            <i class="fa-solid fa-user"></i>
+            <span id="loginUser">Admin</span>
+                 </div>
+
+            <div class="clock" id="clock"></div>
+
+        </div>
+
+    </div>
+
+    <!-- RUNNING TEXT -->
+        <div class="running-text">
+
+        <marquee>
+        🍽️ Selamat Datang di Dashboard Admin •
+        📦 Pantau Pesanan Secara Realtime •
+        💰 Laporan Penjualan Otomatis •
+        📊 Data Menu Selalu Terupdate
+        </marquee>
+
+        </div>
+
+        </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+
+
+        <div class="menu-title">
+        </div>
+
+<ul>
+
+<li onclick="loadPage('pages/home.html')">
+    <i class="fa-solid fa-house"></i>
+    <span>Dashboard</span>
+</li>
+
+<li onclick="loadPage('pages/menu.html')">
+    <i class="fa-solid fa-utensils"></i>
+    <span>Menu</span>
+</li>
+
+<li onclick="loadPage('pages/orders.html')">
+    <i class="fa-solid fa-receipt"></i>
+    <span>Pesanan</span>
+</li>
+
+<li onclick="loadPage('pages/meja.html')">
+    <i class="fa-solid fa-table"></i>
+    <span>Meja</span>
+</li>
+
+<li onclick="loadPage('pages/laporan.html')">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Laporan</span>
+</li>
+
+<li onclick="loadPage('pages/pengaturan.html')">
+    <i class="fa-solid fa-gear"></i>
+    <span>Pengaturan</span>
+</li>
+
+<li onclick="logout()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <span>Logout</span>
+</li>
+
+
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main" id="main">
+
+
+
+   <iframe 
+    src="pages/home.html"
+    class="content-frame"
+    id="contentFrame">
+  </iframe>
+  
+
+</div>
+<footer>
+    &copy; 2026 DSPSS_dirgaz.itc® ** ENGINEERING DEVELOPMENT ** OF DIRGA ZAI AND TEAM **
+
+</footer>
+        </div>
+
+    <!-- JS -->
+     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+     <script src="js/dashboard.js"></script>
+    <script src="../JS/firebase.js"></script>
+
+</body>
+
+</html>
