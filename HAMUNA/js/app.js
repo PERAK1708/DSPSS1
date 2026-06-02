@@ -1,44 +1,94 @@
 const menuList = document.getElementById("menuList");
+const cartItems = document.getElementById("cartItems");
+const cartSummary = document.getElementById("cartSummary");
 
-
+let allMenus = [];
+let kategoriAktif = "Semua";
 let cart = [];
-// =====================
-// LOAD MENU REALTIME
-// =====================
+let currentOrderId = null;
+let currentOrderData = null;
+// ================= MENU REALTIME =================
 firestore.collection("menus")
-.onSnapshot((snap) => {
+.onSnapshot((snap)=>{
+
+    allMenus = [];
+
+    snap.forEach((doc)=>{
+        allMenus.push({
+            id: doc.id,
+            ...doc.data()
+        });
+    });
+
+    renderMenu();
+});
+
+// ================= RENDER MENU =================
+function renderMenu(){
+
+    const keyword = document
+        .getElementById("searchMenu")
+        .value
+        .toLowerCase();
 
     menuList.innerHTML = "";
 
-    snap.forEach((doc) => {
+    allMenus.forEach((m)=>{
 
-        const m = doc.data();
 
-        menuList.innerHTML += `
-        <div class="card">
-            <h3>${m.nama}</h3>
-            <p>Rp ${m.harga}</p>
+        if(kategoriAktif !== "Semua" && m.kategori !== kategoriAktif){
+            return;
+        }
 
-            <button onclick="addCart('${m.nama}', ${m.harga})">
-                + Keranjang
-            </button>
+        if(!m.nama.toLowerCase().includes(keyword)){
+            return;
+        }
+
+menuList.innerHTML += `
+<div class="card ${m.stok === false ? 'out-stock' : ''}">
+
+    <div class="img-box">
+
+        <img src="${m.gambar || 'https://via.placeholder.com/300'}" class="menu-img">
+
+        ${m.bestSeller ? `<span class="best-badge">🔥 Best Seller</span>` : ""}
+
+        ${m.stok === false ? `<span class="stock-badge">STOK HABIS</span>` : ""}
+
+    </div>
+
+    <div class="card-body">
+
+        <h3>${m.nama}</h3>
+
+        <div class="kategori">${m.kategori}</div>
+
+        <div class="harga">
+            Rp ${Number(m.harga).toLocaleString("id-ID")}
         </div>
-        `;
+
+        <button class="btn-cart"
+            onclick="addCart('${m.nama}', ${m.harga})"
+            ${m.stok === false ? "disabled" : ""}>
+            ${m.stok === false ? "Stok Habis" : "+ Tambah Keranjang"}
+        </button>
+
+    </div>
+
+</div>
+`;
     });
+}
 
-});
-
-// =====================
-// ADD CART (REAL)
-// =====================
+// ================= CART =================
 function addCart(nama, harga){
 
     let item = cart.find(i => i.nama === nama);
 
     if(item){
-        item.qty += 1;
+        item.qty++;
     }else{
-        cart.push({ nama, harga, qty: 1 });
+        cart.push({ nama, harga, qty:1 });
     }
 
     renderCart();
@@ -48,85 +98,67 @@ function plus(index){
     cart[index].qty++;
     renderCart();
 }
+
 function minus(index){
     cart[index].qty--;
 
     if(cart[index].qty <= 0){
-        cart.splice(index, 1);
+        cart.splice(index,1);
     }
 
     renderCart();
 }
-function removeItem(index){
-    cart.splice(index, 1);
-    renderCart();
-}
 
-// =====================
-// RENDER CART
-// =====================
+// ================= RENDER CART =================
 function renderCart(){
 
-    const checkoutBox = document.querySelector(".checkout");
-
     let total = 0;
+    let totalItem = 0;
 
-    let html = cart.map((item, index) => {
+    cartItems.innerHTML = "";
+
+    cart.forEach((item,index)=>{
 
         total += item.harga * item.qty;
+        totalItem += item.qty;
 
-        return `
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:6px;
-            margin:6px 0;
-            background:#f3f3f3;
-            border-radius:8px;
-        ">
+        cartItems.innerHTML += `
+        <div class="cart-item">
 
             <div>
                 <b>${item.nama}</b><br>
-                Rp ${item.harga * item.qty}
+                Rp ${(item.harga * item.qty).toLocaleString('id-ID')}
             </div>
 
-            <div style="display:flex;align-items:center;gap:5px;">
+            <div class="qty-box">
 
                 <button onclick="minus(${index})">-</button>
-
                 <span>${item.qty}</span>
-
                 <button onclick="plus(${index})">+</button>
-
-                <button onclick="removeItem(${index})">❌</button>
 
             </div>
 
         </div>
         `;
-    }).join("");
-checkoutBox.innerHTML = `
-        <input type="text" id="customerName" placeholder="Nama Kamu">
-        <input type="text" id="tableNumber" placeholder="Nomor Meja">
+    });
 
-        <div style="margin:10px 0;font-weight:bold;">
-            Total: Rp ${total}
+    cartSummary.innerHTML = `
+        <hr>
+
+        <div class="summary-row">
+            <span>Total Item</span>
+            <b>${totalItem}</b>
         </div>
 
-        ${html}
-
-        <button onclick="checkout(${total})">
-            Kirim Pesanan
-        </button>
+        <div class="summary-row">
+            <span>Total Bayar</span>
+            <b>Rp ${total.toLocaleString('id-ID')}</b>
+        </div>
     `;
 }
 
-
-// =====================
-// CHECKOUT
-// =====================
-function checkout(total){
+// ================= CHECKOUT =================
+function checkout(){
 
     const nama = document.getElementById("customerName").value.trim();
     const meja = document.getElementById("tableNumber").value.trim();
@@ -137,24 +169,125 @@ function checkout(total){
     }
 
     if(!nama || !meja){
-        alert("Isi nama & meja!");
+        alert("Isi nama & meja");
         return;
     }
 
-    const nomorOrder = "ORD-" + Date.now();
+    let total = 0;
+    cart.forEach(i => total += i.harga * i.qty);
 
-    db.ref("orders").push({
-        nomorOrder,
+    currentOrderId = "ORD-" + Date.now();
+
+    currentOrderData = {
+        nomorOrder: currentOrderId,
         nama,
         meja,
-        items: cart,
+       items: cart.map(item => ({
+    nama:item.nama,
+    harga:item.harga,
+    qty:item.qty
+})),
+        
         total,
-        status: "pending",
+        status: "draft",
         waktu: Date.now()
-    })
-    .then(() => {
+    };
 
-        alert("Pesanan berhasil dikirim!");
+    // SIMPAN KE FIREBASE (DRAFT)
+        db.ref("draftOrders")
+        .child(currentOrderId)
+        .set(currentOrderData);
+
+    showModal(currentOrderData);
+}
+
+// ================= FILTER =================
+document.querySelectorAll(".category button")
+.forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+        document.querySelectorAll(".category button")
+        .forEach(b=>b.classList.remove("active"));
+
+        btn.classList.add("active");
+
+        kategoriAktif = btn.dataset.kategori;
+
+        renderMenu();
+
+    });
+
+});
+
+// ================= SEARCH =================
+document.getElementById("searchMenu")
+.addEventListener("input", renderMenu);
+
+// INIT
+renderCart();
+
+// ================= MODAL LOGIC=================
+function showModal(order){
+
+    currentOrderData = order;
+
+    document.getElementById("orderModal").classList.remove("hidden");
+
+    document.getElementById("modalOrderId").innerText = order.nomorOrder;
+    document.getElementById("modalNama").innerText = order.nama;
+    document.getElementById("modalMeja").innerText = order.meja;
+    document.getElementById("modalTotal").innerText = order.total.toLocaleString("id-ID");
+
+    let html = "";
+    order.items.forEach(i=>{
+        html += `<p>${i.nama} x${i.qty}</p>`;
+    });
+
+    document.getElementById("modalItems").innerHTML = html;
+}
+function closeModal(){
+
+    // HAPUS DATA DI FIREBASE
+    if(currentOrderId){
+        db.ref("draftOrders")
+        .child(currentOrderId)
+        .remove();
+    }
+
+    // TUTUP MODAL
+    document.getElementById("orderModal").classList.add("hidden");
+
+    // KEMBALI KE MENU (TIDAK HAPUS CART)
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // RESET ORDER STATE
+    currentOrderId = null;
+    currentOrderData = null;
+}
+function saveOrder(){
+
+    if(!currentOrderId) return;
+
+    currentOrderData.status = "pending";
+
+    // simpan ke orders
+    db.ref("orders")
+    .child(currentOrderId)
+    .set(currentOrderData)
+    .then(()=>{
+
+        // hapus draft
+        return db.ref("draftOrders")
+        .child(currentOrderId)
+        .remove();
+
+    })
+    .then(()=>{
+
+        alert(
+            "Pesanan berhasil dikonfirmasi.\n\nSimpan ID pesanan untuk cek status."
+        );
 
         cart = [];
         renderCart();
@@ -162,13 +295,26 @@ function checkout(total){
         document.getElementById("customerName").value = "";
         document.getElementById("tableNumber").value = "";
 
+        document.getElementById("orderModal")
+        .classList.add("hidden");
+
+        currentOrderId = null;
+        currentOrderData = null;
+
     })
-    .catch((error) => {
+.catch((err)=>{
 
-        console.error(error);
+    console.error("ERROR:", err);
 
-        alert("Gagal mengirim pesanan");
+    alert(err.message);
 
-    });
+});
+}
+function copyOrderId(){
 
+    const id = document.getElementById("modalOrderId").innerText;
+
+    navigator.clipboard.writeText(id);
+
+    alert("ID berhasil disalin!");
 }
