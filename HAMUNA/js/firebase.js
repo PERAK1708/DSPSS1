@@ -7,7 +7,11 @@ const firebaseConfig = {
     messagingSenderId: "664175528014",
     appId: "1:664175528014:web:4c789c14fe5de28ee3db1f"
 };
-
+console.log("Firebase:", firebase);
+console.log("database:", firebase.database);
+console.log("auth:", firebase.auth);
+console.log("firestore:", firebase.firestore);
+console.log("storage:", firebase.storage);
 // INIT
 firebase.initializeApp(firebaseConfig);
 
@@ -15,3 +19,4 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();      // Orders (Realtime DB)
 const firestore = firebase.firestore(); // Menu (Firestore)
+const storage = firebase.storage();
