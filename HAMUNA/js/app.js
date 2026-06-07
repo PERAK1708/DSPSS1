@@ -161,17 +161,41 @@ function renderCart(){
 function checkout(){
 
     const nama = document.getElementById("customerName").value.trim();
-    const meja = document.getElementById("tableNumber").value.trim();
 
+    const orderType =
+    document.querySelector('input[name="orderType"]:checked').value;
+
+    const meja =
+    document.getElementById("tableNumber")?.value.trim() || "";
+
+    const alamat =
+        document.getElementById("customerAddress")?.value.trim() || "";
+
+    const lat = window.userLat || null;
+    const lng = window.userLng || null;
     if(cart.length === 0){
         alert("Keranjang kosong");
         return;
     }
 
-    if(!nama || !meja){
-        alert("Isi nama & meja");
+    if(!nama){
+        alert("Isi nama pemesan");
         return;
     }
+
+        if (orderType === "dinein") {
+            if (!meja) {
+                alert("Isi nomor meja");
+                return;
+            }
+        }
+
+        if (orderType === "delivery") {
+            if (!alamat) {
+                alert("Isi alamat atau ambil lokasi");
+                return;
+            }
+        }
 
     let total = 0;
     cart.forEach(i => total += i.harga * i.qty);
@@ -180,23 +204,27 @@ function checkout(){
 
     currentOrderData = {
         nomorOrder: currentOrderId,
-        nama,
-        meja,
-       items: cart.map(item => ({
-    nama:item.nama,
-    harga:item.harga,
-    qty:item.qty
-})),
-        
-        total,
+        nama: nama,
+
+        jenisPesanan: orderType,
+
+        meja: orderType === "dinein" ? meja : "",
+        alamat: orderType === "delivery" ? alamat : "",
+
+        items: cart.map(item => ({
+            nama: item.nama,
+            harga: item.harga,
+            qty: item.qty
+        })),
+
+        total: total,
         status: "draft",
         waktu: Date.now()
     };
-
-    // SIMPAN KE FIREBASE (DRAFT)
-        db.ref("draftOrders")
-        .child(currentOrderId)
-        .set(currentOrderData);
+    
+    db.ref("draftOrders")
+    .child(currentOrderId)
+    .set(currentOrderData);
 
     showModal(currentOrderData);
 }
@@ -236,12 +264,26 @@ function showModal(order){
 
     document.getElementById("modalOrderId").innerText = order.nomorOrder;
     document.getElementById("modalNama").innerText = order.nama;
-    document.getElementById("modalMeja").innerText = order.meja;
-    document.getElementById("modalTotal").innerText = order.total.toLocaleString("id-ID");
+
+    if(order.jenisPesanan === "delivery"){
+        document.getElementById("modalMeja").innerText =
+        "🛵 Delivery\n" + order.alamat;
+    }else{
+        document.getElementById("modalMeja").innerText =
+        "🍽️ Meja " + order.meja;
+    }
+
+    document.getElementById("modalTotal").innerText =
+    order.total.toLocaleString("id-ID");
 
     let html = "";
+
     order.items.forEach(i=>{
-        html += `<p>${i.nama} x${i.qty}</p>`;
+        html += `
+        <p>
+            ${i.nama} x${i.qty}
+        </p>
+        `;
     });
 
     document.getElementById("modalItems").innerHTML = html;
@@ -294,7 +336,14 @@ function saveOrder(){
 
         document.getElementById("customerName").value = "";
         document.getElementById("tableNumber").value = "";
+        document.getElementById("customerAddress").value = "";
 
+document.querySelector(
+'input[name="orderType"][value="dinein"]'
+).checked = true;
+
+tableBox.style.display = "block";
+addressBox.style.display = "none";
         document.getElementById("orderModal")
         .classList.add("hidden");
 
@@ -317,4 +366,58 @@ function copyOrderId(){
     navigator.clipboard.writeText(id);
 
     alert("ID berhasil disalin!");
+}
+
+const orderTypes = document.querySelectorAll('input[name="orderType"]');
+const tableBox = document.getElementById("tableBox");
+const addressBox = document.getElementById("addressBox");
+
+orderTypes.forEach(radio => {
+    radio.addEventListener("change", () => {
+
+        if (radio.value === "delivery" && radio.checked) {
+            tableBox.style.display = "none";
+            addressBox.style.display = "block";
+
+            // reset meja biar tidak kepakai
+            document.getElementById("tableNumber").value = "";
+
+        } else {
+            tableBox.style.display = "block";
+            addressBox.style.display = "none";
+
+            // reset alamat
+            document.getElementById("customerAddress").value = "";
+        }
+
+    });
+});
+
+function getLocation() {
+    if (!navigator.geolocation) {
+        alert("Browser tidak support lokasi");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition((pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+
+        window.userLat = lat;
+        window.userLng = lng;
+
+        const link = `https://www.google.com/maps?q=${lat},${lng}`;
+
+        const textarea = document.getElementById("customerAddress");
+
+        // kalau kosong → isi, kalau sudah ada → tambahkan
+        if (!textarea.value) {
+            textarea.value = link;
+        } else {
+            textarea.value += "\n" + link;
+        }
+
+    }, (err) => {
+        alert("Gagal ambil lokasi: " + err.message);
+    });
 }
