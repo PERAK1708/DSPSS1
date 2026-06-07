@@ -12,7 +12,12 @@ body{
 
 /* ================= HEADER ================= */
 .header{
-    background:#605652;
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:url('https://i.ibb.co/gLbnpbKN/Batak-Ethnic-Seamless-Pattern-Motif-Ulos-Wallpaper-Pattern-Seamless-Background-Image-And-Wallpape.jpg') center/cover no-repeat;
+
     color:white;
     padding:20px;
     text-align:center;
@@ -20,18 +25,22 @@ body{
 }
 
 .logo{
-    font-size:22px;
+    font-size:45px;
     font-weight:bold;
 }
 
 .subtitle{
-    font-size:13px;
+    font-size:23px;
     opacity:.8;
     margin-top:5px;
 }
 
 /* ================= SEARCH ================= */
 .search-box{
+    position: sticky;
+    top: 105px; /* sesuaikan tinggi header */
+    z-index: 999;
+    background:#7d8bc1;
     padding:15px;
 }
 
@@ -48,8 +57,14 @@ body{
 .category{
     display:flex;
     gap:10px;
-    padding:0 15px 10px;
     overflow-x:auto;
+
+    position:sticky;
+    top:170px; /* sesuaikan */
+    z-index:998;
+
+    background:#7d8bc1;
+    padding:10px 15px;
 }
 
 .category button{
@@ -67,11 +82,6 @@ body{
 }
 
 /* ================= LAYOUT ================= */
-.container{
-    display:flex;
-    gap:20px;
-    padding:15px;
-}
 
 /* MENU GRID */
 .menu-grid{
@@ -89,13 +99,13 @@ body{
     padding:15px;
     height:fit-content;
     position:sticky;
-    top:15px;
+    top:230px; /* di bawah header + search + kategori */
     min-width:320px;
     box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
 .checkout input{
-    width:48%;
+    width:100%;
     padding:10px;
     margin:3px 1%;
     border:1px solid #ddd;
@@ -342,4 +352,262 @@ body{
     border-radius:10px;
     background:#22c55e;
     color:white;
+}
+
+.container{
+    display:flex;
+    gap:20px;
+    padding:15px;
+    margin-top:10px;
+}
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#7d8bc1;
+}
+.order-type{
+    display:flex;
+    gap:15px;
+    margin-bottom:10px;
+}
+
+.order-type label{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    font-size:14px;
+}
+
+#addressBox textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    resize:none;
+    margin-top:5px;
+}
+.btn-location{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    transition:0.25s;
+
+    box-shadow:0 4px 12px rgba(37,99,235,0.25);
+}
+
+.btn-location:hover{
+    transform:scale(1.03);
+    filter:brightness(1.1);
+}
+
+.btn-location:active{
+    transform:scale(0.98);
+}
+
+.contact-bar{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.contact-bar a{
+    background:#25D366;
+    color:rgb(6, 0, 0);
+    padding:8px 12px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.contact-bar a:nth-child(2){
+    background:#2196F3;
+}
+
+
+.contact-bar{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+    flex-wrap:wrap;
+}
+
+.contact-bar a{
+    text-decoration:none;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+}
+
+#waLink{
+    background:#25D366;
+}
+
+#telLink{
+    background:#2196F3;
+}
+
+#telegramLink{
+    background:#229ED9;
+}
+/* ================= RESPONSIVE FIX ALL DEVICE ================= */
+
+img{
+    max-width:100%;
+    height:auto;
+}
+
+html{
+    -webkit-text-size-adjust:100%;
+}
+
+/* HEADER */
+.logo{
+    font-size:clamp(24px,5vw,45px);
+}
+
+.subtitle{
+    font-size:clamp(12px,2vw,23px);
+}
+
+.contact-bar{
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+/* CHECKOUT */
+.checkout{
+    width:100%;
+    min-width:0;
+    box-sizing:border-box;
+}
+
+.checkout input,
+.checkout textarea{
+    width:100%;
+    margin:5px 0;
+    box-sizing:border-box;
+}
+
+/* MODAL */
+.modal-box{
+    max-height:90vh;
+    overflow-y:auto;
+}
+
+/* MENU */
+.menu-grid{
+    grid-auto-rows:max-content;
+}
+
+.card{
+    height:auto;
+}
+
+.card-body h3{
+    font-size:clamp(16px,2vw,20px);
+}
+
+.harga{
+    font-size:clamp(18px,2vw,24px);
+}
+
+/* TABLET */
+@media (max-width:768px){
+
+    .container{
+        flex-direction:column;
+    }
+
+    .checkout{
+        position:static;
+        width:100%;
+        min-width:100%;
+    }
+
+    .menu-grid{
+        grid-template-columns:
+        repeat(auto-fill,minmax(160px,1fr));
+    }
+
+    .menu-img{
+        height:160px;
+        object-fit:cover;
+    }
+
+    .search-box{
+        top:0;
+    }
+
+    .category{
+        top:0;
+    }
+
+    .category button{
+        font-size:13px;
+        padding:8px 12px;
+    }
+}
+
+/* HP KECIL */
+@media (max-width:480px){
+
+    .header{
+        padding:15px 10px;
+    }
+
+    .logo{
+        font-size:24px;
+    }
+
+    .subtitle{
+        font-size:12px;
+    }
+
+    .menu-grid{
+        grid-template-columns:1fr;
+    }
+
+    .menu-img{
+        height:180px;
+    }
+
+    .contact-bar{
+        gap:6px;
+    }
+
+    .contact-bar a{
+        font-size:12px;
+        padding:7px 10px;
+    }
+
+    .category{
+        padding:8px;
+    }
+
+    .category button{
+        font-size:12px;
+        padding:7px 10px;
+    }
+}
+
+/* IPHONE SAFE AREA */
+body{
+    padding-bottom:
+    calc(120px + env(safe-area-inset-bottom));
 }
