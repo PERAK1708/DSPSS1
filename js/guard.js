@@ -19,7 +19,7 @@ auth.onAuthStateChanged(async (user) => {
 
             alert("⚠️ Anda belum login! Silakan login terlebih dahulu.");
 
-            window.location.replace("/publik/index.html");
+            window.location.replace("/HAMUNA/index.html");
         }
 
         return;
