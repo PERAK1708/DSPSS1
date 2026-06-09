@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment & Status</title>
+
+<link rel="stylesheet" href="../publik/css/payment.css">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- PAYMENT -->
+    <div class="box pay-box">
+        <h2>💳 Pembayaran</h2>
+
+        <div class="qr">QRIS</div>
+
+        <p>ID Pesanan:</p>
+        <b id="orderId">-</b>
+
+        <p>Total:</p>
+        <h3 id="total">Rp 0</h3>
+
+        <button onclick="copyId()">Copy ID</button>
+    </div>
+
+    <!-- STATUS -->
+    <div class="box">
+        <h2>📦 Cek Status</h2>
+
+        <input id="inputId" placeholder="Masukkan ID">
+
+        <button onclick="cekStatus()">Cek Status</button>
+
+        <div id="statusBox" class="status"></div>
+
+        <!-- HASIL DETAIL ORDER -->
+        <div id="orderInfo"></div>
+
+    </div>
+
+</div>
+
+
+<script src="/publik/js/firebase.js"></script>
+<script src="../publik/js/payment.js"></script>
+
+</body>
+</html>

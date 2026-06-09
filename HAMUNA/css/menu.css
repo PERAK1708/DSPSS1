@@ -1,0 +1,184 @@
+body{
+    font-family:Arial;
+    background:#f5f6fa;
+    padding:20px;
+}
+
+/* HEADER */
+.header-menu{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+#btnTambah{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* FORM */
+.form-box{
+    display:none;
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.form-box.active{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+/* FILTER ATAS */
+.top-filter{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    margin-bottom:15px;
+}
+
+.filter-btn{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#e2e8f0;
+}
+
+.filter-btn.active{
+    background:#ff6b35;
+    color:white;
+}
+
+/* LIST */
+.menu-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:15px;
+}
+
+/* CARD */
+.menu-card{
+    background:white;
+    padding:10px;
+    border-radius:12px;
+}
+
+.menu-img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+/* BUTTON ACTION BIAR ADA WARNA */
+.menu-card button{
+    margin-top:5px;
+    padding:6px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.btn-edit{ background:#3b82f6; color:white; }
+.btn-delete{ background:#ef4444; color:white; }
+.btn-stok{ background:#10b981; color:white; }
+.btn-best{ background:#f59e0b; color:white; }
+
+/* FORM INPUT LEBIH BAGUS */
+.form-box input,
+.form-box select{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+}
+
+#btnSimpan{
+    background:#22c55e;
+    color:white;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* CARD BUTTON */
+.menu-card button{
+    margin:3px 2px;
+    padding:6px 8px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-box{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    width:300px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.modal-action{
+    display:flex;
+    gap:10px;
+}
+
+.modal-action button{
+    flex:1;
+    padding:8px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#btnUpdate{
+    background:#3b82f6;
+    color:white;
+}
+
+.modal-content{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    width:350px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.modal-content input,
+.modal-content select{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+.preview-edit{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:10px;
+}
