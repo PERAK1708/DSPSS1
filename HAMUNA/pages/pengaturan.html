@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pengaturan Payment</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+
+<link rel="stylesheet" href="../css/pengaturan.css">
+</head>
+
+<body>
+
+<h2>SETTING PAYMENT</h2>
+<!-- ================= KONTAK & SOSMED ================= -->
+<div>
+    <h3>Kontak & Sosial Media</h3>
+
+    <div class="setting-row">
+        whatsapp <input type="text" id="whatsapp" placeholder="Nomor WhatsApp">
+        <button id="btn-whatsapp" onclick="toggleVisible('whatsapp')"> 👁️ Show </button>
+        <button onclick="updateField('whatsapp')">Simpan</button>
+
+
+    </div>
+
+    <div class="setting-row">
+        telepon <input type="text" id="telepon" placeholder="Nomor Telepon">
+        <button id="btn-telepon" onclick="toggleVisible('telepon')"> 👁️ Show </button>
+        <button onclick="updateField('telepon')">Simpan</button>
+
+    </div>
+
+    <div class="setting-row">
+        telegram <input type="text" id="telegram" placeholder="Link Telegram">
+        <button id="btn-telegram" onclick="toggleVisible('telegram')"> 👁️ Show </button>
+        <button onclick="updateField('telegram')">Simpan</button>
+    </div>
+
+    <div class="setting-row">
+        Instagram<input type="text" id="instagram" placeholder="Link Instagram">
+        <button id="btn-instagram" onclick="toggleVisible('instagram')"> 👁️ Show </button>
+        <button onclick="updateField('instagram')">Simpan</button>
+    </div>
+
+    <div class="setting-row">
+      facebook  <input type="text" id="facebook" placeholder="Link Facebook">
+        <button id="btn-tiktok" onclick="toggleVisible('tiktok')"> 👁️ Show </button>        
+        <button onclick="updateField('facebook')">Simpan</button>
+    </div>
+
+    <div class="setting-row">
+        tiktok <input type="text" id="tiktok" placeholder="Link TikTok">
+        <button id="btn-tiktok" onclick="toggleVisible('tiktok')"> 👁️ Show </button>
+        <button onclick="updateField('tiktok')">Simpan</button>
+    </div>
+
+    <div class="setting-row">
+        email <input type="email" id="email" placeholder="Email">
+        <button id="btn-email" onclick="toggleVisible('email')"> 👁️ Show </button>
+        <button onclick="updateField('email')">Simpan</button>
+    </div>
+
+    <div class="setting-row">
+        alamat <input type="text" id="alamat" placeholder="Alamat Restoran">
+        <button id="btn-alamat" onclick="toggleVisible('alamat')"> 👁️ Show </button>
+        <button onclick="updateField('alamat')">Simpan</button>
+    </div>
+</div>
+
+<hr>
+<!-- ================= BANK ================= -->
+<div>
+    <h3>Tambah Bank</h3>
+
+    <input id="bankName" placeholder="BCA / BRI / Mandiri">
+    <input id="bankRek" placeholder="Nomor Rekening">
+    <input id="bankOwner" placeholder="Nama Pemilik">
+
+    <button onclick="addBank()">+ Tambah Bank</button>
+
+    <div id="bankList"></div>
+</div>
+
+<hr>
+
+<!-- ================= QRIS ================= -->
+<div>
+    <h3>QRIS</h3>
+
+    <input type="file" id="qrisFile" accept="image/*">
+    <button onclick="uploadQRIS()">Upload QRIS</button>
+
+    <br><br>
+    <img id="previewQRIS" style="width:200px; display:none;">
+</div>
+
+<!-- JS -->
+<script src="../js/firebasesetting.js"></script>
+<script src="../js/settings.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f1ea;
+    -webkit-text-size-adjust:100%;
+}
+
+/* HEADER */
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#5c3d2e;
+    color:#fff;
+    padding:20px;
+    text-align:center;
+}
+
+.logo{
+    font-size:clamp(24px,5vw,45px);
+    font-weight:bold;
+}
+
+.subtitle{
+    margin-top:5px;
+}
+
+/* CONTACT */
+.contact-bar{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:10px;
+}
+
+.contact-bar a{
+    text-decoration:none;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+}
+
+#waLink{background:#25D366;}
+#telLink{background:#2196F3;}
+#telegramLink{background:#229ED9;}
+
+/* SEARCH */
+.search-box{
+    padding:15px;
+}
+
+.search-box input{
+    width:80%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+}
+
+/* CATEGORY */
+.category{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:10px;
+    background:#7b5e57;
+}
+
+.category button{
+    border:none;
+    padding:8px 14px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.category .active{
+    background:#d97706;
+    color:white;
+}
+
+/* CARD MENU */
+.card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.menu-img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:15px;
+}
+
+.btn-cart{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#16a34a;
+    color:white;
+}

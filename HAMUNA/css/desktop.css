@@ -1,0 +1,30 @@
+.container{
+    display:flex;
+    gap:20px;
+    padding:15px;
+}
+
+.menu-grid{
+    flex:1;
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fill,minmax(240px,1fr));
+    gap:18px;
+}
+
+.checkout{
+    width:350px;
+    position:sticky;
+    top:20px;
+
+    background:#fffaf5;
+    border-radius:18px;
+    padding:15px;
+
+    max-height:calc(100vh - 40px);
+    overflow-y:auto;
+}
+
+.mobile-cart-btn{
+    display:none;
+}
